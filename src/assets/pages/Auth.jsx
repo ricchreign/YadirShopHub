@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Auth (){
     const [mode, setMode] = useState ("signup");
     const [error, setError] = useState(null);
-    const {signUp, user, logout, login} = useContext (AuthContext);
+    const {signUp, user, logout, login} = useAuth ();
     const navigate = useNavigate()
 
     const { register , handleSubmit, formState: {errors}, } = useForm();
