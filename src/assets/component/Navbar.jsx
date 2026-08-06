@@ -1,20 +1,31 @@
-import React from "react";
-import { useAuth } from "../../context/AuthContext"
 import {Link} from "react-router-dom"
+import { useCart } from "../../context/CartContext"
+import { useAuth } from "../../context/AuthContext"
 export default function Navbar (){
     const {user, logout} = useAuth();
+    const { cartItems } = useCart()
+    const cartCount = cartItems.reduce (
+        (total, item) => total + item.quantity,
+        (0)
+    );
     return(
         <nav className="navbar">
             <div className="navbar-container">
-                <Link to="/checkout" className="Navbar-brand">
+                
+                <Link to="/" className="navbar-brand" >
                 ShopHub 
                 </Link>
-                <div className="navbar-links">
-                    <Link to="/" className="Navbar-brand">
+                <div className="navbar-links" >
+                    <Link to="/">
                 Home
                 </Link>
-                <Link to="/checkout" className="Navbar-brand">
+                <Link to="/checkout">
                 Cart
+                {cartCount > 0 && (
+                    <span className="cart-badge">
+                        {cartCount}
+                    </span>
+                )}
                 </Link>
                 </div>
                 

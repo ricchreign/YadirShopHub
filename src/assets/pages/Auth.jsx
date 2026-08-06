@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 export default function Auth (){
     const [mode, setMode] = useState ("signup");
     const [error, setError] = useState(null);
-    const {signUp, user, logout, login} = useAuth ();
     const navigate = useNavigate()
+    const {signUp, user, login} = useAuth ();
 
     const { register , handleSubmit, formState: {errors}, } = useForm();
 
@@ -35,7 +35,7 @@ export default function Auth (){
         <div className="page">
             <div className="container">
                 <div className="auth-container">
-                    {user && <p> User logged in: {user.email}</p>}
+                
                     <h1 className="page-title">
                         {mode === "signup" ? "Sign Up" : "Login"}
                     </h1>
@@ -45,7 +45,7 @@ export default function Auth (){
                             <label className="form-label" htmlFor="email">
                                 Email
                             </label>
-                            <input className="form-input" type="email" id="email" {...register("email", { required: "Email is required"})}/>
+                            <input className="form-input" type="email" autoComplete="email" {...register("email", { required: "Email is required"})}/>
                             {errors.email && (
                                 <span className="form-error">{errors.email.message}</span>
                             )}
@@ -66,8 +66,8 @@ export default function Auth (){
                                 },
                             })}
                             className="form-input"
-                            type="passwords"
-                            id="password" 
+                            type="password"
+                            autoComplete="current-password" 
                             />
                             {errors.password && (
                                 <span className="form-error">{errors.password.message}</span>
